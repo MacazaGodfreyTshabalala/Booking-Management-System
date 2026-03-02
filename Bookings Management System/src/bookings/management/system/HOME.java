@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 public class HOME extends javax.swing.JFrame {
     
     public String email;
+    public int manage = 0;
 
     /**
      * Creates new form HOME
@@ -20,11 +22,15 @@ public class HOME extends javax.swing.JFrame {
     public HOME() {
         initComponents();
         
-         ManageVenueBookings whitePanel = new ManageVenueBookings();
+          btList.setVisible(true);
+        
+        //  new ManageVenueBookings().setVisible(true);
+        
+       /*  ManageVenueBookings whitePanel = new ManageVenueBookings();
          whitePanel.setBounds(300,150,500,350);
          getContentPane().add(whitePanel);
          repaint();
-         revalidate();
+         revalidate();*/
         
     }
 
@@ -34,13 +40,27 @@ public class HOME extends javax.swing.JFrame {
         email = userEmail;
     }
     
+    public int ShowManageVenueBooking(int manage)
+    {
+       int x = manage;
+       
+       
+       
+       new ManageVenueBookings().setVisible(true);
+       
+         x=0;
+       
+       
+        return x;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btSignOut = new javax.swing.JButton();
+        btList = new javax.swing.JButton();
         mainPanel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -56,23 +76,22 @@ public class HOME extends javax.swing.JFrame {
                 btSignOutActionPerformed(evt);
             }
         });
-        getContentPane().add(btSignOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 18, -1, 43));
+        getContentPane().add(btSignOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, 43));
+
+        btList.setBackground(new java.awt.Color(0, 153, 255));
+        btList.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btList.setForeground(new java.awt.Color(255, 255, 255));
+        btList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LIST.png"))); // NOI18N
+        btList.setText("Manage Bookings");
+        btList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btList, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 190, 40));
 
         mainPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BACKGROUND.jpg"))); // NOI18N
-        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 740, -1));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,8 +106,33 @@ public class HOME extends javax.swing.JFrame {
             System.exit(0);
         
         }
+        
+        if(manage==1)
+        {
+            
+            ShowManageVenueBooking(manage);
+            
+            
+        
+        }
+       
+         
          
     }//GEN-LAST:event_btSignOutActionPerformed
+
+    private void btListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListActionPerformed
+        // TODO add your handling code here:
+        
+        
+       manage =1;
+       
+       btList.setVisible(false);
+        
+       ShowManageVenueBooking(manage);
+        
+        
+          
+    }//GEN-LAST:event_btListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,12 +167,13 @@ public class HOME extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new HOME().setVisible(true);
+           
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btList;
     private javax.swing.JButton btSignOut;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
