@@ -45,8 +45,8 @@ public class HOME extends javax.swing.JFrame {
        int x = manage;
        
        
-       
-       new ManageVenueBookings().setVisible(true);
+       ManageVenueBookings bookingFrame = new ManageVenueBookings(this);
+        bookingFrame.setVisible(true);
        
          x=0;
        
@@ -55,18 +55,11 @@ public class HOME extends javax.swing.JFrame {
     }
     
     
-    public void HideManageBookingButton(int hide)
+    public void showManageBookingButton()
     {
-        
-         int h = hide;
-         
-       
-         
-         if(h==1)
-         {
-               btManageBookings.setVisible(true);
-         
-         }
+     
+        btManageBookings.setVisible(true);
+              
    
     }
     
