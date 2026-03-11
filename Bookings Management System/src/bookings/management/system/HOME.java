@@ -22,7 +22,7 @@ public class HOME extends javax.swing.JFrame {
     public HOME() {
         initComponents();
         
-          btList.setVisible(true);
+          btManageBookings.setVisible(true);
         
         //  new ManageVenueBookings().setVisible(true);
         
@@ -54,12 +54,28 @@ public class HOME extends javax.swing.JFrame {
         return x;
     }
     
+    
+    public void HideManageBookingButton(int hide)
+    {
+        
+         int h = hide;
+         
+       
+         
+         if(h==1)
+         {
+               btManageBookings.setVisible(true);
+         
+         }
+   
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         btSignOut = new javax.swing.JButton();
-        btList = new javax.swing.JButton();
+        btManageBookings = new javax.swing.JButton();
         mainPanel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,17 +94,17 @@ public class HOME extends javax.swing.JFrame {
         });
         getContentPane().add(btSignOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, 43));
 
-        btList.setBackground(new java.awt.Color(0, 153, 255));
-        btList.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btList.setForeground(new java.awt.Color(255, 255, 255));
-        btList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LIST.png"))); // NOI18N
-        btList.setText("Manage Bookings");
-        btList.addActionListener(new java.awt.event.ActionListener() {
+        btManageBookings.setBackground(new java.awt.Color(0, 153, 255));
+        btManageBookings.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btManageBookings.setForeground(new java.awt.Color(255, 255, 255));
+        btManageBookings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LIST.png"))); // NOI18N
+        btManageBookings.setText("Manage Bookings");
+        btManageBookings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btListActionPerformed(evt);
+                btManageBookingsActionPerformed(evt);
             }
         });
-        getContentPane().add(btList, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 190, 40));
+        getContentPane().add(btManageBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 190, 40));
 
         mainPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BACKGROUND.jpg"))); // NOI18N
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
@@ -120,19 +136,21 @@ public class HOME extends javax.swing.JFrame {
          
     }//GEN-LAST:event_btSignOutActionPerformed
 
-    private void btListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListActionPerformed
+    private void btManageBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btManageBookingsActionPerformed
         // TODO add your handling code here:
         
         
        manage =1;
        
-       btList.setVisible(false);
+       btManageBookings.setVisible(false);
         
        ShowManageVenueBooking(manage);
+       
+       //btManageBookings.setVisible(true);
         
         
           
-    }//GEN-LAST:event_btListActionPerformed
+    }//GEN-LAST:event_btManageBookingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,7 +190,7 @@ public class HOME extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btList;
+    private javax.swing.JButton btManageBookings;
     private javax.swing.JButton btSignOut;
     private javax.swing.JLabel mainPanel;
     // End of variables declaration//GEN-END:variables

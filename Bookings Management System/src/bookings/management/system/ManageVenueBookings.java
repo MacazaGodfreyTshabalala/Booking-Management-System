@@ -49,6 +49,11 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         setLocation(new java.awt.Point(378, 220));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(624, 340));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(625, 340));
@@ -249,7 +254,13 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         
          
        
-        this.dispose();
+        
+        // HOME homeBtList =   new HOME();
+        // homeBtList.HideManageBookingButton(1);
+      
+         this.dispose();
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -264,6 +275,11 @@ public class ManageVenueBookings extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
