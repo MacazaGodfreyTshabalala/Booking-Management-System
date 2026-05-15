@@ -1,10 +1,15 @@
 
 package bookings.management.system;
 
-/**
- *
- * @author Tshabalala.M
- */
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -34,7 +39,7 @@ public class Login extends javax.swing.JFrame {
         lbEmail = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
         lbPassword = new javax.swing.JLabel();
-        pfPassword = new javax.swing.JPasswordField();
+        tfPassword = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
         lbForgotPass = new javax.swing.JLabel();
         btReset = new javax.swing.JButton();
@@ -119,11 +124,11 @@ public class Login extends javax.swing.JFrame {
         lbPassword.setForeground(new java.awt.Color(102, 102, 102));
         lbPassword.setText("Password");
 
-        pfPassword.setForeground(new java.awt.Color(153, 153, 153));
-        pfPassword.setCaretColor(new java.awt.Color(0, 153, 255));
-        pfPassword.addActionListener(new java.awt.event.ActionListener() {
+        tfPassword.setForeground(new java.awt.Color(153, 153, 153));
+        tfPassword.setCaretColor(new java.awt.Color(0, 153, 255));
+        tfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pfPasswordActionPerformed(evt);
+                tfPasswordActionPerformed(evt);
             }
         });
 
@@ -167,7 +172,7 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(lbEmail)
                             .addComponent(tfEmail)
                             .addComponent(lbPassword)
-                            .addComponent(pfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(tfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                             .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -183,7 +188,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(lbPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
@@ -214,18 +219,54 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfEmailActionPerformed
 
-    private void pfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfPasswordActionPerformed
+    private void tfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pfPasswordActionPerformed
+    }//GEN-LAST:event_tfPasswordActionPerformed
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
 
-        HOME HomeFrame =   new HOME();
-        HomeFrame.setVisible(true);
-        HomeFrame.pack();
-        HomeFrame.setLocationRelativeTo(null);
-        this.dispose();
+        String email,password,SUrl,SUser,Spass;
+        
+         SUrl = "jdbc:MySQL://localhost:/3306/java_user_database";
+            SUser = "root";
+            Spass = "";
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(SUrl,SUser,Spass);
+            Statement st = con.createStatement();
+            
+            
+            if("".equals(tfEmail.getText()))
+            {
+            
+                JOptionPane.showMessageDialog(new JFrame(),"Email is required","Error",JOptionPane.ERROR_MESSAGE) ;
+            }
+            else if(!"".equals(String.valueOf(tfPassword.getPassword())))
+            {
+                
+            } 
+            else 
+            {
+                HOME HomeFrame =   new HOME();
+                HomeFrame.setVisible(true);
+                HomeFrame.pack();
+                HomeFrame.setLocationRelativeTo(null);
+                this.dispose();
+            }
+             
+
+        }catch(Exception e)
+        {
+            System.out.println("Erro!"+e.getMessage());
+        }
+        
+        
+        
+        
+        
+       
         
     }//GEN-LAST:event_btLoginActionPerformed
 
@@ -282,7 +323,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbLogos;
     private javax.swing.JLabel lbPassword;
-    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField tfEmail;
+    private javax.swing.JPasswordField tfPassword;
     // End of variables declaration//GEN-END:variables
 }

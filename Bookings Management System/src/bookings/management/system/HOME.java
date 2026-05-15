@@ -112,10 +112,11 @@ public class HOME extends javax.swing.JFrame {
         
         if(a == 0)
         {
-            System.exit(0);
+            
+     
+           System.exit(0);
         
-        }
-        
+        } 
         if(manage==1)
         {
             

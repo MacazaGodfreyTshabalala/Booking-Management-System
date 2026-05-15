@@ -177,7 +177,7 @@
                                   <Component id="lbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lbPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pfPassword" alignment="0" pref="220" max="32767" attributes="0"/>
+                                  <Component id="tfPassword" alignment="0" pref="220" max="32767" attributes="0"/>
                                   <Component id="btLogin" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -198,7 +198,7 @@
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Component id="lbPassword" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pfPassword" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="tfPassword" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btLogin" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -261,7 +261,7 @@
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="pfPassword">
+            <Component class="javax.swing.JPasswordField" name="tfPassword">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="99" red="99" type="rgb"/>
@@ -271,7 +271,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pfPasswordActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPasswordActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btLogin">
