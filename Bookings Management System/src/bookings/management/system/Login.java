@@ -226,11 +226,12 @@ public class Login extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
 
-        String email,password,SUrl,SUser,Spass;
+        String email,password,query,SUrl,SUser,Spass,passDb;
         
-         SUrl = "jdbc:MySQL://localhost:/3306/java_user_database";
+            SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
             SUser = "root";
             Spass = "";
+            int notFound =0;
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -241,14 +242,36 @@ public class Login extends javax.swing.JFrame {
             if("".equals(tfEmail.getText()))
             {
             
-                JOptionPane.showMessageDialog(new JFrame(),"Email is required","Error",JOptionPane.ERROR_MESSAGE) ;
+                JOptionPane.showMessageDialog(new JFrame(),"Please enter your email address","Error",JOptionPane.ERROR_MESSAGE) ;
             }
-            else if(!"".equals(String.valueOf(tfPassword.getPassword())))
+            else if("".equals(String.valueOf(tfPassword.getPassword())))
             {
-                
+                JOptionPane.showMessageDialog(new JFrame(),"Please enter your password","Error",JOptionPane.ERROR_MESSAGE) ;
             } 
             else 
             {
+                email = tfEmail.getText();
+                password = String.valueOf(tfPassword.getPassword());
+                
+                query = "SELECT * FROM user WHERE email="+email;
+                ResultSet rs = st.executeQuery(query);
+                
+                while(rs.next())
+                {
+                    
+                    passDB = rs.getString("password");
+                    notFound =1;
+                
+                
+                }
+                
+                if(notFound == 1 && passDb)
+                {
+                  
+                }
+                
+                
+                
                 HOME HomeFrame =   new HOME();
                 HomeFrame.setVisible(true);
                 HomeFrame.pack();
