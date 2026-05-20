@@ -226,7 +226,7 @@ public class Login extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
 
-        String email,password,query,SUrl,SUser,Spass,passDb;
+        String email,password,query,SUrl,SUser,Spass,passDb =null;
         
             SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
             SUser = "root";
@@ -253,30 +253,33 @@ public class Login extends javax.swing.JFrame {
                 email = tfEmail.getText();
                 password = String.valueOf(tfPassword.getPassword());
                 
-                query = "SELECT * FROM user WHERE email="+email;
+                query = "SELECT * FROM user WHERE email= '"+email+"'";
                 ResultSet rs = st.executeQuery(query);
                 
                 while(rs.next())
                 {
-                    
-                    passDB = rs.getString("password");
+                    passDb = rs.getString("password");
                     notFound =1;
-                
-                
                 }
                 
-                if(notFound == 1 && passDb)
+                if(notFound == 1 && password.equals(passDb))
                 {
                   
+                    HOME HomeFrame =   new HOME();
+                    HomeFrame.setVisible(true);
+                    HomeFrame.pack();
+                    HomeFrame.setLocationRelativeTo(null);
+                     this.dispose();
+                }
+                else
+                {
+                    
+                JOptionPane.showMessageDialog(new JFrame(),"Incorrect email or password","Error",JOptionPane.ERROR_MESSAGE) ;
                 }
                 
                 
                 
-                HOME HomeFrame =   new HOME();
-                HomeFrame.setVisible(true);
-                HomeFrame.pack();
-                HomeFrame.setLocationRelativeTo(null);
-                this.dispose();
+               
             }
              
 
