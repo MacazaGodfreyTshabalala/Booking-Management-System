@@ -1,16 +1,17 @@
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
+
+
+
 package bookings.management.system;
 
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-/**
- *
- * @author Tshabalala.M
- */
+
 public class HOME extends javax.swing.JFrame {
     
     public String email;
@@ -21,23 +22,56 @@ public class HOME extends javax.swing.JFrame {
      */
     public HOME() {
         initComponents();
-        
-          btManageBookings.setVisible(true);
-        
-        //  new ManageVenueBookings().setVisible(true);
-        
-       /*  ManageVenueBookings whitePanel = new ManageVenueBookings();
-         whitePanel.setBounds(300,150,500,350);
-         getContentPane().add(whitePanel);
-         repaint();
-         revalidate();*/
-        
+             
+           
     }
 
     public HOME(String userEmail){
     
-        initComponents();
-        email = userEmail;
+             initComponents();
+        
+            email = userEmail;
+            String query,SUrl,SUser,Spass,surname="",name="";
+        
+            SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
+            SUser = "root";
+            Spass = "";
+            int notFound =0;
+            
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(SUrl,SUser,Spass);
+            Statement st = con.createStatement();
+            
+              query = "SELECT * FROM user WHERE email= '"+email+"'";
+                ResultSet rs = st.executeQuery(query);
+                
+                while(rs.next())
+                {
+                     surname = rs.getString("surname");
+                     name = rs.getString("name");
+                     notFound =1;
+                }
+                
+                
+                if(notFound ==1)
+                {
+                      
+        
+                      btManageBookings.setVisible(true);
+                      lbWelcome.setText("Welcome "+surname +" "+name);
+                      lbWelcome.setVisible(true);
+                }
+            
+        }    
+       catch(Exception e)
+        {
+            System.out.println("Erro!"+e.getMessage());
+        }
+        
+        
+         
     }
     
     public int ShowManageVenueBooking(int manage)
@@ -45,7 +79,7 @@ public class HOME extends javax.swing.JFrame {
        int x = manage;
        
        
-       ManageVenueBookings bookingFrame = new ManageVenueBookings(this);
+       ManageVenueBookings bookingFrame = new ManageVenueBookings(this,email);
         bookingFrame.setVisible(true);
        
          x=0;
@@ -59,6 +93,7 @@ public class HOME extends javax.swing.JFrame {
     {
      
         btManageBookings.setVisible(true);
+        lbWelcome.setVisible(true);
               
    
     }
@@ -69,17 +104,18 @@ public class HOME extends javax.swing.JFrame {
 
         btSignOut = new javax.swing.JButton();
         btManageBookings = new javax.swing.JButton();
+        lbWelcome = new javax.swing.JLabel();
         mainPanel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btSignOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
+        btSignOut.setText("Sign Out");
         btSignOut.setBackground(new java.awt.Color(0, 153, 255));
         btSignOut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btSignOut.setForeground(new java.awt.Color(255, 0, 51));
-        btSignOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
-        btSignOut.setText("Sign Out");
         btSignOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSignOutActionPerformed(evt);
@@ -98,6 +134,11 @@ public class HOME extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btManageBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 190, 40));
+
+        lbWelcome.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbWelcome.setForeground(new java.awt.Color(204, 204, 204));
+        lbWelcome.setText("Welcome");
+        getContentPane().add(lbWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 320, -1));
 
         mainPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BACKGROUND.jpg"))); // NOI18N
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
@@ -137,6 +178,7 @@ public class HOME extends javax.swing.JFrame {
        manage =1;
        
        btManageBookings.setVisible(false);
+       lbWelcome.setVisible(false);
         
        ShowManageVenueBooking(manage);
        
@@ -186,6 +228,7 @@ public class HOME extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btManageBookings;
     private javax.swing.JButton btSignOut;
+    private javax.swing.JLabel lbWelcome;
     private javax.swing.JLabel mainPanel;
     // End of variables declaration//GEN-END:variables
 }

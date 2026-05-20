@@ -1,17 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package bookings.management.system;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 
 public class ManageVenueBookings extends javax.swing.JFrame {
 
     HOME home;
-    public ManageVenueBookings(HOME homeFrame) {
+    String email;
+    public ManageVenueBookings(HOME homeFrame,String email) {
         initComponents();
         this.home = homeFrame;
+        this.email = email;
     }
 
     /**
@@ -42,8 +48,8 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         tfVenue = new javax.swing.JTextField();
         btSaveBooking = new javax.swing.JButton();
         btClearBookingForm = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        timePicker2 = new com.github.lgooddatepicker.components.TimePicker();
+        dcDate = new com.toedter.calendar.JDateChooser();
+        tpTime = new com.github.lgooddatepicker.components.TimePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 255));
@@ -59,24 +65,24 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(625, 340));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LIST.png"))); // NOI18N
         jLabel1.setText("MANAGE BOOKINGS");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
 
+        btExitManageV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EXIT.png"))); // NOI18N
         btExitManageV.setBackground(new java.awt.Color(0, 153, 255));
         btExitManageV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btExitManageV.setForeground(new java.awt.Color(255, 0, 51));
-        btExitManageV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EXIT.png"))); // NOI18N
         btExitManageV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExitManageVActionPerformed(evt);
             }
         });
 
+        jLabel2.setText("View Bookings");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("View Bookings");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,23 +114,23 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel3.setText("*Click on row to Edit Booking");
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel3.setText("*Click on row to Edit Booking");
 
+        jLabel4.setText("Add New Booking");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Add New Booking");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Venue");
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Date");
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Time");
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
 
         tfVenue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,8 +195,8 @@ public class ManageVenueBookings extends javax.swing.JFrame {
                                             .addComponent(jLabel6))
                                         .addGap(24, 24, 24)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(timePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tpTime, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(btSaveBooking)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -227,11 +233,11 @@ public class ManageVenueBookings extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(timePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tpTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btSaveBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,6 +281,51 @@ public class ManageVenueBookings extends javax.swing.JFrame {
 
     private void btSaveBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveBookingActionPerformed
         // TODO add your handling code here:
+        
+        
+            String query,SUrl,SUser,Spass;
+        
+            SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
+            SUser = "root";
+            Spass = "";
+            int notFound =0;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(SUrl,SUser,Spass);
+            Statement st = con.createStatement();
+            
+            
+            if("".equals(tfVenue.getText().trim()))
+            {
+            
+                JOptionPane.showMessageDialog(new JFrame(),"Please enter venue you want to book","Error",JOptionPane.ERROR_MESSAGE) ;
+            }
+            else if(dcDate.getDate() == null)
+            {
+                JOptionPane.showMessageDialog(new JFrame(),"Please select date for booking","Error",JOptionPane.ERROR_MESSAGE) ;
+            } 
+            else if(tpTime.getTime() == null )
+            {
+               
+                 JOptionPane.showMessageDialog(new JFrame(),"Please select time for booking","Error",JOptionPane.ERROR_MESSAGE) ;
+               
+            }
+            else
+            {
+      
+                
+            }
+             
+
+        }
+        catch(Exception e)
+        {
+            System.out.println("Erro!"+e.getMessage());
+        }
+        
+        
+        
     }//GEN-LAST:event_btSaveBookingActionPerformed
 
     private void btClearBookingFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearBookingFormActionPerformed
@@ -321,7 +372,7 @@ public class ManageVenueBookings extends javax.swing.JFrame {
     private javax.swing.JButton btClearBookingForm;
     private javax.swing.JButton btExitManageV;
     private javax.swing.JButton btSaveBooking;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser dcDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -334,10 +385,10 @@ public class ManageVenueBookings extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField tfVenue;
     private com.raven.swing.TimePicker timePicker1;
-    private com.github.lgooddatepicker.components.TimePicker timePicker2;
     private com.raven.swing.TimePickerMenu timePickerMenu1;
     private org.jdesktop.animation.timing.TimingTargetAdapter timingTargetAdapter1;
     private org.jdesktop.animation.timing.TimingTargetAdapter timingTargetAdapter2;
     private org.jdesktop.animation.timing.TimingTargetAdapter timingTargetAdapter3;
+    private com.github.lgooddatepicker.components.TimePicker tpTime;
     // End of variables declaration//GEN-END:variables
 }
