@@ -5,8 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 
 
@@ -283,12 +287,13 @@ public class ManageVenueBookings extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-            String query,SUrl,SUser,Spass;
+            String query,SUrl,SUser,Spass,venue, date, time, status;
+            
         
             SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
             SUser = "root";
             Spass = "";
-            int notFound =0;
+            
         
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -313,7 +318,24 @@ public class ManageVenueBookings extends javax.swing.JFrame {
             }
             else
             {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                LocalTime selectedTime = tpTime.getTime();
+                
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                
+                venue = tfVenue.getText().trim();
+                date = dateFormat.format(  dcDate.getDate());
+                time = selectedTime.format(formatter);
+                status = "Waiting Approval";
+                query = "INSERT INTO venue_bookings(email, venue, date, time, status)"+
+                        "VALUES('"+email+"' , '"+venue+"' , '"+date+"' , '"+time+"' , '"+status+"')";
       
+                st.execute(query);
+                tfVenue.setText("");
+                dcDate.setDate(null);
+                tpTime.setTime(null);
+                
+                showMessageDialog(null,"Booking added succefully and is awaitiing approval");
                 
             }
              

@@ -137,8 +137,8 @@ public class HOME extends javax.swing.JFrame {
 
         lbWelcome.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbWelcome.setForeground(new java.awt.Color(204, 204, 204));
-        lbWelcome.setText("Welcome");
-        getContentPane().add(lbWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 320, -1));
+        lbWelcome.setText("Welcome Tshabalala Macaza");
+        getContentPane().add(lbWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 350, -1));
 
         mainPanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BACKGROUND.jpg"))); // NOI18N
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, -1));
